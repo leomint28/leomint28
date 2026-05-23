@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minteena Prajith — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --border: #1f2430;
+      --accent: #7fffd4;
+      --accent2: #4fa3e0;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --card: #161a22;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(127,255,212,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(127,255,212,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(127,255,212,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      top: -100px; right: -200px;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .glow-orb2 {
+      position: fixed;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,163,224,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      bottom: 100px; left: -100px;
+      animation: drift 16s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes drift {
+      from { transform: translate(0,0); }
+      to   { transform: translate(40px, 60px); }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(13,15,18,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+    .hero-inner {
+      padding: 6rem 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-left {}
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-bio {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+
+    /* PROFILE IMAGE PLACEHOLDER */
+    .hero-photo {
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+    .photo-frame {
+      width: 260px;
+      height: 320px;
+      border: 2px dashed rgba(127,255,212,0.25);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      background: rgba(127,255,212,0.03);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .photo-frame img.uploaded-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .photo-placeholder-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(127,255,212,0.4);
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .photo-icon {
+      font-size: 2rem;
+      opacity: 0.3;
+    }
+    #photoInput { display: none; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.82rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0f12;
+      border: 1px solid var(--accent);
+      font-weight: 500;
+    }
+    .btn-primary:hover { background: #5fd4b0; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 0; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 120px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .skill-card {
+      background: var(--card);
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+    .skill-card:hover { background: #1a1f2b; }
+    .skill-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: rgba(127,255,212,0.07);
+      color: var(--text);
+      border: 1px solid rgba(127,255,212,0.12);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .project-card:hover { border-color: rgba(127,255,212,0.3); transform: translateY(-3px); }
+
+    /* Project image area */
+    .project-img {
+      width: 100%;
+      height: 180px;
+      background: #0f1218;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-img img.proj-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .project-img-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(127,255,212,0.3);
+      letter-spacing: 0.12em;
+      text-align: center;
+      z-index: 1;
+    }
+    .project-img-icon { font-size: 1.5rem; opacity: 0.2; z-index: 1; }
+    .proj-img-input { display: none; }
+
+    .project-body { padding: 1.6rem; }
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      opacity: 0.6;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+    .project-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .project-stack span {
+      font-size: 0.65rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent2);
+      border: 1px solid rgba(79,163,224,0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.4;
+    }
+    .exp-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .exp-company {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .exp-bullets li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 0.05em;
+    }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 2rem;
+      align-items: start;
+    }
+    .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 0.3rem;
+    }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    .edu-school {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    /* CONTACT FORM */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-inner h2 { margin-bottom: 0.5rem; }
+    .contact-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: rgba(127,255,212,0.4); }
+    .form-group textarea { min-height: 140px; }
+    .form-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      margin-top: 1rem;
+      display: none;
+      padding: 0.7rem 1rem;
+      border-radius: 3px;
+    }
+    .form-status.success {
+      display: block;
+      color: var(--accent);
+      background: rgba(127,255,212,0.07);
+      border: 1px solid rgba(127,255,212,0.2);
+    }
+    .form-status.error {
+      display: block;
+      color: #f87171;
+      background: rgba(248,113,113,0.07);
+      border: 1px solid rgba(248,113,113,0.2);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { display: flex; justify-content: center; order: -1; }
+      .photo-frame { width: 180px; height: 220px; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-date { margin-bottom: 0.3rem; }
+      .edu-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow-orb"></div>
+<div class="glow-orb2"></div>
+
+<nav>
+  <span class="nav-logo">MP — Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrapper">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1>It's me,<br><em>Minteena!</em></h1>
+        <p class="hero-bio">
+          Final year engineering student specialising in embedded systems, IoT, and robotics.
+          I'm passionate about the IoT space — building systems that connect the physical and digital world,
+          from smart sensors to autonomous robots.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Say Hello</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame" onclick="document.getElementById('photoInput').click()" title="Click to upload your photo">
+          <span class="photo-icon">🖼️</span>
+          <span class="photo-placeholder-text">CLICK TO ADD<br>YOUR PHOTO</span>
+        </div>
+        <input type="file" id="photoInput" accept="image/*" onchange="uploadPhoto(this)"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">01 — Skills</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-cat">Programming & Automation</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Assembly</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">Raspberry Pi</span>
+          <span class="tag">Microbit</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Robotics & Simulation</div>
+        <div class="skill-tags">
+          <span class="tag">ROS 2</span>
+          <span class="tag">Turtlebot3</span>
+          <span class="tag">Dobot Magician</span>
+          <span class="tag">Webots</span>
+          <span class="tag">Dobot Virtual Lab</span>
+          <span class="tag">OpenCV</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Operations & Data</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Process Mapping</span>
+          <span class="tag">Data Mining</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">3D Modelling & Networking</div>
+        <div class="skill-tags">
+          <span class="tag">AutoCAD</span>
+          <span class="tag">TinkerCAD</span>
+          <span class="tag">Multisim</span>
+          <span class="tag">Cisco Packet Tracer</span>
+          <span class="tag">iFogSim</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">02 — Projects</div>
+      <h2>Things I've built</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">01</div>
+          <h3>Autonomous Road Defect Detection System</h3>
+          <p>Real-time road defect detection on a Turtlebot3 Burger using OpenCV and Pi Camera in ROS 2, with LiDAR + IMU for obstacle avoidance. Foxglove Studio dashboard for live telemetry.</p>
+          <div class="project-stack">
+            <span>ROS 2</span><span>OpenCV</span><span>LiDAR</span><span>IMU</span><span>Foxglove</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">02</div>
+          <h3>Smart Fire Sprinkler System</h3>
+          <p>IoT-integrated fire detection using Thermal Cameras and Flame Sensors. Assesses fire intensity and deploys water optimally to minimise damage — faster response than conventional systems.</p>
+          <div class="project-stack">
+            <span>IoT</span><span>Thermal Camera</span><span>Flame Sensors</span><span>Embedded C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">03</div>
+          <h3>Automated Pick-and-Place Sorting System</h3>
+          <p>Path-following Maqueen robot transports blocks to a Dobot Magician robotic arm. Camera-based color and text detection classifies objects; conveyor sorting with adjustable speed control.</p>
+          <div class="project-stack">
+            <span>Maqueen</span><span>Dobot Magician</span><span>Computer Vision</span><span>Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">04</div>
+          <h3>Autonomous Waypoint Navigation & Object Detection</h3>
+          <p>Turtlebot3 performing autonomous waypoint navigation with 360° scanning. Real-time color recognition via OpenCV tracks and counts objects by color on a live dashboard.</p>
+          <div class="project-stack">
+            <span>Turtlebot3</span><span>ROS 2</span><span>OpenCV</span><span>Python</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER CARD 5 — replace with your project -->
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">05</div>
+          <h3>Your Next Project</h3>
+          <p>Add your project title, description, and tech stack here.</p>
+          <div class="project-stack">
+            <span>Tag 1</span><span>Tag 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER CARD 6 -->
+      <div class="project-card reveal">
+        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
+          <span class="project-img-icon">📷</span>
+          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
+          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        </div>
+        <div class="project-body">
+          <div class="project-num">06</div>
+          <h3>Your Next Project</h3>
+          <p>Add your project title, description, and tech stack here.</p>
+          <div class="project-stack">
+            <span>Tag 1</span><span>Tag 2</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">03 — Experience</div>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-date">Jul 2025 –<br>Sep 2025</div>
+        <div>
+          <div class="exp-role">Cargo Operations Intern</div>
+          <div class="exp-company">dnata — Emirates Group</div>
+          <ul class="exp-bullets">
+            <li>Led Staff Welfare & Facilities Improvement Project — surveyed staff, identified gaps, benchmarked against international standards.</li>
+            <li>Designed Power BI dashboards for Planned Preventive Maintenance (PPM), tracking scheduled, completed, and overdue vendor tasks.</li>
+            <li>Built a Facilities Project Management dashboard for cross-terminal project visibility and accountability.</li>
+            <li>Analysed Automated Storage and Retrieval Systems (ASRS) operational efficiency to drive warehouse optimisation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-date">Apr 2025</div>
+        <div>
+          <div class="exp-role">Robotics & AI Trainee</div>
+          <div class="exp-company">SkillPlay Education</div>
+          <ul class="exp-bullets">
+            <li>Mentored middle and high school girls in AI and robotics using Replit and Microbit, fostering interest in STEM.</li>
+            <li>Led hands-on programming activities and project-based learning sessions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ADD YOUR THIRD WORK EXPERIENCE HERE -->
+      <div class="exp-item reveal">
+        <div class="exp-date">Month Year –<br>Month Year</div>
+        <div>
+          <div class="exp-role">Role Title</div>
+          <div class="exp-company">Company Name</div>
+          <ul class="exp-bullets">
+            <li>Describe what you did here.</li>
+            <li>Another bullet point about your responsibilities or achievements.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">04 — Education</div>
+      <h2>Where I studied</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-year">2022 – Present</div>
+      <div>
+        <div class="edu-degree">BE (Hons) Computer & Autonomous Systems Engineering</div>
+        <div class="edu-school">University of Wollongong in Dubai</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrapper">
+    <div class="contact-inner reveal">
+      <div class="section-label">05 — Contact</div>
+      <h2>Let's connect</h2>
+      <p class="contact-sub">Open to IoT opportunities, internships, and interesting engineering projects. Drop me a message and I'll get back to you.</p>
+
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="senderName" placeholder="e.g. Sarah Ahmed" />
+      </div>
+      <div class="form-group">
+        <label>Your Email</label>
+        <input type="email" id="senderEmail" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="msgBody" placeholder="Hi Minteena, I came across your portfolio and..."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="sendMessage()" style="width:100%;justify-content:center;">Send Message →</button>
+      <div class="form-status" id="formStatus"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrapper">© 2026 Minteena Prajith</div>
+</footer>
+
+<script>
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Profile photo upload ── */
+  function uploadPhoto(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const frame = document.querySelector('.photo-frame');
+      frame.querySelector('.photo-icon').style.display = 'none';
+      frame.querySelector('.photo-placeholder-text').style.display = 'none';
+      let img = frame.querySelector('img.uploaded-photo');
+      if (!img) { img = document.createElement('img'); img.className = 'uploaded-photo'; frame.appendChild(img); }
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ── Project photo upload ── */
+  function triggerProjImg(container) {
+    container.querySelector('.proj-img-input').click();
+  }
+  function loadProjImg(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const container = input.closest('.project-img');
+      container.querySelector('.project-img-icon').style.display = 'none';
+      container.querySelector('.project-img-label').style.display = 'none';
+      let img = container.querySelector('img.proj-photo');
+      if (!img) { img = document.createElement('img'); img.className = 'proj-photo'; container.appendChild(img); }
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ── Contact form → mailto ── */
+  function sendMessage() {
+    const name    = document.getElementById('senderName').value.trim();
+    const email   = document.getElementById('senderEmail').value.trim();
+    const message = document.getElementById('msgBody').value.trim();
+    const status  = document.getElementById('formStatus');
+
+    if (!name || !email || !message) {
+      status.className = 'form-status error';
+      status.textContent = 'Please fill in all fields before sending.';
+      return;
+    }
+
+    const subject = encodeURIComponent('Portfolio Message from ' + name);
+    const body    = encodeURIComponent(
+      'Name: ' + name + '\nEmail: ' + email + '\n\n' + message
+    );
+    window.location.href = 'mailto:minteenaprajith123@gmail.com?subject=' + subject + '&body=' + body;
+
+    status.className = 'form-status success';
+    status.textContent = '✓ Opening your mail app — thanks for reaching out, ' + name + '!';
+  }
+</script>
+
+</body>
+</html>
