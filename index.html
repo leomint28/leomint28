@@ -314,7 +314,7 @@
     /* Project image area */
     .project-img {
       width: 100%;
-      height: 180px;
+      height: 230px;
       background: #0f1218;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -573,11 +573,9 @@
         </div>
       </div>
       <div class="hero-photo">
-        <div class="photo-frame" onclick="document.getElementById('photoInput').click()" title="Click to upload your photo">
-          <span class="photo-icon">🖼️</span>
-          <span class="photo-placeholder-text">CLICK TO ADD<br>YOUR PHOTO</span>
+        <div class="photo-frame">
+          <img class="uploaded-photo" src="images/profile.jpg" alt="Minteena Prajith" />
         </div>
-        <input type="file" id="photoInput" accept="image/*" onchange="uploadPhoto(this)"/>
       </div>
     </div>
   </div>
@@ -649,10 +647,8 @@
     <div class="projects-grid">
 
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project1.jpg" alt="Autonomous Road Defect Detection System" />
         </div>
         <div class="project-body">
           <div class="project-num">01</div>
@@ -665,10 +661,8 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project2.jpg" alt="Smart Fire Sprinkler System" />
         </div>
         <div class="project-body">
           <div class="project-num">02</div>
@@ -681,10 +675,8 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project3.jpg" alt="Automated Pick-and-Place Sorting System" />
         </div>
         <div class="project-body">
           <div class="project-num">03</div>
@@ -697,10 +689,8 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project4.jpg" alt="Autonomous Waypoint Navigation" />
         </div>
         <div class="project-body">
           <div class="project-num">04</div>
@@ -712,36 +702,58 @@
         </div>
       </div>
 
-      <!-- PLACEHOLDER CARD 5 — replace with your project -->
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project5.jpg" alt="Your Project 5" />
         </div>
         <div class="project-body">
           <div class="project-num">05</div>
-          <h3>Network Infrastructure Development</h3>
-          <p>Designed and implemented a complete network infrastructure, including routers, switches, cloud integration, security solutions, and VoIP systems enhancing connectivity, security, and efficiency.</p>
+          <h3>Your Project Title</h3>
+          <p>Add your project description here.</p>
           <div class="project-stack">
-            <span>Cisco Packet Tracer</span><span>Networking</span>
+            <span>Tag 1</span><span>Tag 2</span>
           </div>
         </div>
       </div>
 
-      <!-- PLACEHOLDER CARD 6 -->
       <div class="project-card reveal">
-        <div class="project-img" onclick="triggerProjImg(this)" title="Click to add project photo">
-          <span class="project-img-icon">📷</span>
-          <span class="project-img-label">CLICK TO ADD PROJECT PHOTO</span>
-          <input type="file" class="proj-img-input" accept="image/*" onchange="loadProjImg(this)"/>
+        <div class="project-img">
+          <img class="proj-photo" src="images/project6.jpg" alt="Your Project 6" />
         </div>
         <div class="project-body">
           <div class="project-num">06</div>
-          <h3>Solar Tracking Device</h3>
-          <p>Developed a solar tracker using LDRs to detect light and automatically adjust panel orientation for maximum efficiency.</p>
+          <h3>Your Project Title</h3>
+          <p>Add your project description here.</p>
           <div class="project-stack">
-            <span>Arduino</span><span>LDR</span>
+            <span>Tag 1</span><span>Tag 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img">
+          <img class="proj-photo" src="images/project7.jpg" alt="Smart Fleet Tracker" />
+        </div>
+        <div class="project-body">
+          <div class="project-num">07</div>
+          <h3>Smart Fleet Tracker</h3>
+          <p>A real-time Industrial IoT (IIoT) telemetry solution leveraging the MQTT protocol to stream live vehicle fleet data into a dynamic Node-RED dashboard for continuous visual monitoring.</p>
+          <div class="project-stack">
+            <span>IIoT</span><span>MQTT</span><span>Node-RED</span><span>Telemetry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img">
+          <img class="proj-photo" src="images/project8.jpg" alt="Line Following Robot" />
+        </div>
+        <div class="project-body">
+          <div class="project-num">08</div>
+          <h3>Line Following Robot — Webots Simulation</h3>
+          <p>Implemented a line-following robot using the Epoch robot in the Webots simulation environment, programming sensor-based navigation logic for precise path tracking.</p>
+          <div class="project-stack">
+            <span>Webots</span><span>Epoch Robot</span><span>Python</span><span>Simulation</span>
           </div>
         </div>
       </div>
@@ -860,41 +872,6 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* ── Profile photo upload ── */
-  function uploadPhoto(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const frame = document.querySelector('.photo-frame');
-      frame.querySelector('.photo-icon').style.display = 'none';
-      frame.querySelector('.photo-placeholder-text').style.display = 'none';
-      let img = frame.querySelector('img.uploaded-photo');
-      if (!img) { img = document.createElement('img'); img.className = 'uploaded-photo'; frame.appendChild(img); }
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  /* ── Project photo upload ── */
-  function triggerProjImg(container) {
-    container.querySelector('.proj-img-input').click();
-  }
-  function loadProjImg(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const container = input.closest('.project-img');
-      container.querySelector('.project-img-icon').style.display = 'none';
-      container.querySelector('.project-img-label').style.display = 'none';
-      let img = container.querySelector('img.proj-photo');
-      if (!img) { img = document.createElement('img'); img.className = 'proj-photo'; container.appendChild(img); }
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
 
   /* ── Contact form → mailto ── */
   function sendMessage() {
