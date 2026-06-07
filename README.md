@@ -1,7 +1,6 @@
 # Minteena Prajith — Personal Portfolio
 
 > Live site: **[leomint28.github.io](https://leomint28.github.io)**  
-> Replace `yourusername` with your actual GitHub username after deploying.
 
 ---
 
