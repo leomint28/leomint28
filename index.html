@@ -4,539 +4,318 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minteena Prajith — Portfolio</title>
+
+  <!-- ─── SECURITY HEADERS ─── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0d0f12;
-      --surface: #13161b;
-      --border: #1f2430;
-      --accent: #7fffd4;
-      --accent2: #4fa3e0;
-      --text: #e8eaf0;
-      --muted: #6b7280;
-      --card: #161a22;
+      --bg: #0d0f12; --surface: #13161b; --border: #1f2430;
+      --accent: #7fffd4; --accent2: #4fa3e0; --text: #e8eaf0;
+      --muted: #6b7280; --card: #161a22;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Instrument Sans', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
+    body { background: var(--bg); color: var(--text); font-family: 'Instrument Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
     }
-
     body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(127,255,212,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(127,255,212,0.03) 1px, transparent 1px);
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(to right, rgba(127,255,212,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(127,255,212,0.03) 1px, transparent 1px);
       background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
     }
+    .glow-orb { position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(127,255,212,0.06) 0%, transparent 70%); pointer-events: none; z-index: 0; top: -100px; right: -200px; animation: drift 12s ease-in-out infinite alternate; }
+    .glow-orb2 { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,163,224,0.05) 0%, transparent 70%); pointer-events: none; z-index: 0; bottom: 100px; left: -100px; animation: drift 16s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(40px, 60px); } }
 
-    .glow-orb {
-      position: fixed;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(127,255,212,0.06) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      top: -100px; right: -200px;
-      animation: drift 12s ease-in-out infinite alternate;
-    }
-    .glow-orb2 {
-      position: fixed;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,163,224,0.05) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      bottom: 100px; left: -100px;
-      animation: drift 16s ease-in-out infinite alternate-reverse;
-    }
-    @keyframes drift {
-      from { transform: translate(0,0); }
-      to   { transform: translate(40px, 60px); }
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(13,15,18,0.8);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
-    }
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; background: rgba(13,15,18,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.4rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; font-family: 'DM Mono', monospace; letter-spacing: 0.06em; transition: color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--accent); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: none; position: fixed; top: 57px; left: 0; right: 0; background: rgba(13,15,18,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); z-index: 199; padding: 1.5rem 2rem; flex-direction: column; gap: 1.2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--muted); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.1em; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:hover { color: var(--accent); }
 
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+    /* ── WRAPPER ── */
+    .wrapper { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 0 2rem; }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 80px;
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+    .hero-inner { padding: 6rem 0 4rem; display: grid; grid-template-columns: 1fr 280px; gap: 4rem; align-items: center; width: 100%; }
+    h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.05; color: var(--text); margin-bottom: 1.5rem; animation: fadeUp 0.8s ease 0.1s both; }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio { color: var(--muted); line-height: 1.75; font-size: 1rem; margin-bottom: 2.5rem; animation: fadeUp 0.8s ease 0.2s both; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s ease 0.3s both; }
+    .hero-photo { animation: fadeUp 0.8s ease 0.2s both; display: flex; align-items: center; justify-content: center; }
+    .photo-ring-outer {
+      width: 292px; height: 292px; border-radius: 50%;
+      /* Static arc ring: bright on top-right, fades out bottom-left */
+      background: conic-gradient(
+        from -70deg,
+        var(--accent)    0deg,
+        var(--accent2)   70deg,
+        transparent      130deg,
+        transparent      230deg,
+        var(--accent2)   290deg,
+        var(--accent)    360deg
+      );
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
     }
-    .hero-inner {
-      padding: 6rem 0 4rem;
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 4rem;
-      align-items: center;
-      width: 100%;
+    /* Dashed orbit ring */
+    .photo-ring-outer::before {
+      content: ''; position: absolute; inset: -16px; border-radius: 50%;
+      border: 1px dashed rgba(127,255,212,0.18);
+      box-shadow: 0 0 0 1px rgba(127,255,212,0.04);
     }
-    .hero-left {}
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s ease 0.1s both;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-bio {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1rem;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.8s ease 0.2s both;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      animation: fadeUp 0.8s ease 0.3s both;
-    }
-
-    /* PROFILE IMAGE PLACEHOLDER */
-    .hero-photo {
-      animation: fadeUp 0.8s ease 0.2s both;
+    /* Outer faint ring */
+    .photo-ring-outer::after {
+      content: ''; position: absolute; inset: -30px; border-radius: 50%;
+      border: 1px solid rgba(79,163,224,0.07);
     }
     .photo-frame {
-      width: 260px;
-      height: 320px;
-      border: 2px dashed rgba(127,255,212,0.25);
-      border-radius: 6px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      background: rgba(127,255,212,0.03);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
+      width: 276px; height: 276px; border-radius: 50%; overflow: hidden;
+      border: 5px solid var(--bg); background: var(--card); position: relative;
+      box-shadow: 0 0 40px rgba(127,255,212,0.06), inset 0 0 20px rgba(0,0,0,0.3);
     }
-    .photo-frame img.uploaded-photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    .photo-placeholder-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: rgba(127,255,212,0.4);
-      letter-spacing: 0.1em;
-      text-align: center;
-      line-height: 1.6;
-    }
-    .photo-icon {
-      font-size: 2rem;
-      opacity: 0.3;
-    }
-    #photoInput { display: none; }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.4rem;
-      font-size: 0.82rem;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.05em;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #0d0f12;
-      border: 1px solid var(--accent);
-      font-weight: 500;
-    }
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em; border-radius: 3px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: #0d0f12; border: 1px solid var(--accent); font-weight: 500; }
     .btn-primary:hover { background: #5fd4b0; }
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* SECTIONS */
+    /* ── SECTIONS ── */
     section { padding: 6rem 0; }
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      max-width: 120px;
-    }
-    h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 3rem;
-      line-height: 1.1;
-    }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px; }
+    h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 3rem; line-height: 1.1; }
 
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .skill-card {
-      background: var(--card);
-      padding: 1.5rem;
-      transition: background 0.2s;
-    }
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .skill-card { background: var(--card); padding: 1.5rem; transition: background 0.2s; }
     .skill-card:hover { background: #1a1f2b; }
-    .skill-cat {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
+    .skill-cat { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .tag {
-      font-size: 0.72rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      background: rgba(127,255,212,0.07);
-      color: var(--text);
-      border: 1px solid rgba(127,255,212,0.12);
-      font-family: 'DM Mono', monospace;
-    }
+    .tag { font-size: 0.72rem; padding: 0.25rem 0.6rem; border-radius: 2px; background: rgba(127,255,212,0.07); color: var(--text); border: 1px solid rgba(127,255,212,0.12); font-family: 'DM Mono', monospace; }
 
-    /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative;
-    }
-    .project-card:hover { border-color: rgba(127,255,212,0.3); transform: translateY(-3px); }
-
-    /* Project image area */
-    .project-img {
-      width: 100%;
-      height: 230px;
-      background: #0f1218;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .project-img img.proj-photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .project-img-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: rgba(127,255,212,0.3);
-      letter-spacing: 0.12em;
-      text-align: center;
-      z-index: 1;
-    }
-    .project-img-icon { font-size: 1.5rem; opacity: 0.2; z-index: 1; }
-    .proj-img-input { display: none; }
-
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; cursor: pointer; position: relative; }
+    .project-card:hover { border-color: rgba(127,255,212,0.4); transform: translateY(-4px); }
+    .project-card::after { content: 'VIEW DETAILS ↗'; position: absolute; inset: 0; background: rgba(13,15,18,0.7); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; opacity: 0; transition: opacity 0.25s; backdrop-filter: blur(2px); }
+    .project-card:hover::after { opacity: 1; }
+    .project-img { width: 100%; height: 230px; background: #0f1218; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .project-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .project-body { padding: 1.6rem; }
-    .project-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      opacity: 0.6;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.6rem;
-    }
-    .project-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.05rem;
-      margin-bottom: 0.7rem;
-      line-height: 1.3;
-    }
-    .project-card p {
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 1rem;
-    }
+    .project-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); opacity: 0.6; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+    .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 0.7rem; line-height: 1.3; }
+    .project-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
     .project-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-    .project-stack span {
-      font-size: 0.65rem;
-      font-family: 'DM Mono', monospace;
-      color: var(--accent2);
-      border: 1px solid rgba(79,163,224,0.2);
-      padding: 0.2rem 0.5rem;
-      border-radius: 2px;
-    }
+    .project-stack span { font-size: 0.65rem; font-family: 'DM Mono', monospace; color: var(--accent2); border: 1px solid rgba(79,163,224,0.2); padding: 0.2rem 0.5rem; border-radius: 2px; }
 
-    /* EXPERIENCE */
+    /* ── EXPERIENCE ── */
     .exp-list { display: flex; flex-direction: column; }
-    .exp-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 0 2rem;
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-    }
+    .exp-item { display: grid; grid-template-columns: 160px 1fr; gap: 0 2rem; padding: 2rem 0; border-top: 1px solid var(--border); }
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
-    .exp-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      padding-top: 0.2rem;
-      line-height: 1.4;
-    }
-    .exp-role {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .exp-company {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.8rem;
-    }
+    .exp-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); padding-top: 0.2rem; line-height: 1.4; }
+    .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .exp-company { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.8rem; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .exp-bullets li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-      padding-left: 1rem;
-      position: relative;
-    }
-    .exp-bullets li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 0.7rem;
-      top: 0.05em;
-    }
+    .exp-bullets li { font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding-left: 1rem; position: relative; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.05em; }
 
-    /* EDUCATION */
-    .edu-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0 2rem;
-      align-items: start;
-    }
-    .edu-year {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      white-space: nowrap;
-      padding-top: 0.3rem;
-    }
-    .edu-degree {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
-    }
-    .edu-school {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-    }
+    /* ── EDUCATION ── */
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; display: grid; grid-template-columns: auto 1fr; gap: 0 2rem; align-items: start; }
+    .edu-year { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); white-space: nowrap; padding-top: 0.3rem; }
+    .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .edu-school { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.08em; }
 
-    /* CONTACT FORM */
+    /* ── CERTIFICATIONS ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s, transform 0.2s; }
+    .cert-card:hover { border-color: rgba(127,255,212,0.3); transform: translateY(-2px); }
+    .cert-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .cert-info {}
+    .cert-name { font-family: 'DM Serif Display', serif; font-size: 0.95rem; margin-bottom: 0.25rem; line-height: 1.3; }
+    .cert-issuer { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .cert-date { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
+
+    /* ── ACHIEVEMENTS ── */
+    .achievement-list { display: flex; flex-direction: column; gap: 1rem; }
+    .achievement-item { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; cursor: pointer; transition: border-color 0.25s, transform 0.25s; }
+    .achievement-item:hover { border-color: rgba(127,255,212,0.35); transform: translateX(4px); }
+    .achievement-left { display: flex; align-items: center; gap: 1.2rem; }
+    .achievement-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .achievement-title { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 0.2rem; }
+    .achievement-sub { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; }
+    .achievement-arrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); opacity: 0.5; transition: opacity 0.2s; white-space: nowrap; }
+    .achievement-item:hover .achievement-arrow { opacity: 1; }
+
+    /* ── CONTACT ── */
     #contact { border-top: 1px solid var(--border); }
     .contact-inner { max-width: 600px; margin: 0 auto; }
     .contact-inner h2 { margin-bottom: 0.5rem; }
-    .contact-sub {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-    }
+    .contact-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .contact-social { display: flex; gap: 0.8rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .social-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.1rem; font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.06em; border-radius: 3px; text-decoration: none; border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .social-btn svg { width: 14px; height: 14px; fill: currentColor; }
     .form-group { margin-bottom: 1.2rem; }
-    .form-group label {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.9rem;
-      padding: 0.8rem 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: rgba(127,255,212,0.4); }
+    .form-group label { display: block; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 3px; color: var(--text); font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(127,255,212,0.4); }
     .form-group textarea { min-height: 140px; }
-    .form-status {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      margin-top: 1rem;
-      display: none;
-      padding: 0.7rem 1rem;
-      border-radius: 3px;
+    .form-status { font-family: 'DM Mono', monospace; font-size: 0.75rem; margin-top: 1rem; display: none; padding: 0.7rem 1rem; border-radius: 3px; }
+    .form-status.success { display: block; color: var(--accent); background: rgba(127,255,212,0.07); border: 1px solid rgba(127,255,212,0.2); }
+    .form-status.error { display: block; color: #f87171; background: rgba(248,113,113,0.07); border: 1px solid rgba(248,113,113,0.2); }
+
+    /* ── MODAL ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(5,7,10,0.88); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(10px); }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: #13161b; border: 1px solid var(--border); border-radius: 8px; max-width: 780px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; transform: translateY(30px) scale(0.98); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal::-webkit-scrollbar { width: 5px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+    .modal-close { position: sticky; top: 0; float: right; margin: 1rem 1rem 0 0; background: rgba(30,35,45,0.9); border: 1px solid var(--border); color: var(--muted); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; backdrop-filter: blur(4px); }
+    .modal-close:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── IMAGE SLIDER ── */
+    .modal-slider { position: relative; width: 100%; overflow: hidden; border-radius: 6px 6px 0 0; background: #0a0c0f; }
+    .modal-hero-img { width: 100%; height: 320px; object-fit: cover; display: block; transition: opacity 0.25s ease; }
+    .modal-hero-img.fading { opacity: 0; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(13,15,18,0.75); border: 1px solid rgba(127,255,212,0.25); color: var(--accent); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; backdrop-filter: blur(6px); line-height: 1; }
+    .slider-btn:hover { background: rgba(127,255,212,0.12); border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
+    .slider-btn:disabled { opacity: 0.15; cursor: default; pointer-events: none; }
+    .slider-btn.prev { left: 12px; }
+    .slider-btn.next { right: 12px; }
+    .slider-counter { position: absolute; bottom: 10px; right: 12px; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: rgba(255,255,255,0.85); background: rgba(0,0,0,0.55); padding: 0.2rem 0.55rem; border-radius: 20px; letter-spacing: 0.08em; }
+    .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+    .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+    .slider-dot.active { background: var(--accent); transform: scale(1.3); }
+
+    .modal-body { padding: 2rem; }
+    .modal-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.7rem; line-height: 1.2; margin-bottom: 1.2rem; }
+    .modal-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .modal-features { margin-bottom: 1.5rem; }
+    .modal-features h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .modal-features ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .modal-features li { font-size: 0.85rem; color: var(--muted); padding-left: 1rem; position: relative; line-height: 1.6; }
+    .modal-features li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.1em; }
+    .modal-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .modal-stack span { font-size: 0.7rem; font-family: 'DM Mono', monospace; color: var(--accent2); border: 1px solid rgba(79,163,224,0.25); padding: 0.3rem 0.7rem; border-radius: 2px; }
+    .modal-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-wrap { position: relative; overflow: hidden; }
+    .testimonial-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .testimonial-card {
+      min-width: 100%; background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 2.5rem; display: grid;
+      grid-template-columns: auto 1fr; gap: 1.8rem; align-items: start;
+      flex-shrink: 0; position: relative; overflow: hidden;
     }
-    .form-status.success {
-      display: block;
-      color: var(--accent);
-      background: rgba(127,255,212,0.07);
-      border: 1px solid rgba(127,255,212,0.2);
+    .testimonial-card::before {
+      content: '\201C'; position: absolute; top: -0.2rem; right: 1.5rem;
+      font-family: 'DM Serif Display', serif; font-size: 8rem; color: rgba(127,255,212,0.06);
+      line-height: 1; pointer-events: none;
     }
-    .form-status.error {
-      display: block;
-      color: #f87171;
-      background: rgba(248,113,113,0.07);
-      border: 1px solid rgba(248,113,113,0.2);
+    .testimonial-avatar {
+      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(127,255,212,0.2); flex-shrink: 0;
+    }
+    .testimonial-avatar-placeholder {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(127,255,212,0.1), rgba(79,163,224,0.1));
+      border: 2px solid rgba(127,255,212,0.15); display: flex; align-items: center;
+      justify-content: center; font-size: 1.8rem; flex-shrink: 0;
+    }
+    .testimonial-right {}
+    .testimonial-text {
+      font-size: 0.95rem; color: var(--text); line-height: 1.85;
+      margin-bottom: 1.4rem; font-style: italic; opacity: 0.9;
+    }
+    .testimonial-name {
+      font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 0.2rem;
+    }
+    .testimonial-role {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .testimonial-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.8rem;
+    }
+    .testimonial-dots { display: flex; gap: 6px; }
+    .testimonial-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--border);
+      border: none; cursor: pointer; padding: 0; transition: background 0.3s, transform 0.3s;
+    }
+    .testimonial-dot.active { background: var(--accent); transform: scale(1.4); }
+    .testimonial-arrows { display: flex; gap: 0.6rem; }
+    .testimonial-arrow {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .testimonial-arrow:hover { border-color: var(--accent); color: var(--accent); }
+    .testimonial-progress {
+      height: 2px; background: var(--border); border-radius: 2px; margin-top: 1.2rem; overflow: hidden;
+    }
+    .testimonial-progress-bar {
+      height: 100%; background: var(--accent); border-radius: 2px;
+      width: 0%; transition: width 0.1s linear;
+    }
+    @media (max-width: 600px) {
+      .testimonial-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; }
+      .testimonial-avatar, .testimonial-avatar-placeholder { width: 56px; height: 56px; }
     }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.5rem 0;
-      text-align: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      position: relative;
-      z-index: 1;
-    }
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.5rem 0; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; position: relative; z-index: 1; }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.2rem; }
       .hero-inner { grid-template-columns: 1fr; }
       .hero-photo { display: flex; justify-content: center; order: -1; }
-      .photo-frame { width: 180px; height: 220px; }
+      .photo-ring-outer { width: 210px; height: 210px; } .photo-frame { width: 194px; height: 194px; }
       .exp-item { grid-template-columns: 1fr; }
       .exp-date { margin-bottom: 0.3rem; }
       .edu-card { grid-template-columns: 1fr; }
+      .achievement-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .modal-hero-img { height: 200px; }
+      .modal-body { padding: 1.2rem; }
     }
   </style>
 </head>
@@ -545,18 +324,45 @@
 <div class="glow-orb"></div>
 <div class="glow-orb2"></div>
 
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
 <nav>
-  <span class="nav-logo">MP — Portfolio</span>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <span class="nav-logo">MP — Portfolio</span>
 </nav>
 
-<!-- HERO -->
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#education" onclick="closeMenu()">Education</a>
+  <a href="#certifications" onclick="closeMenu()">Certifications</a>
+  <a href="#achievements" onclick="closeMenu()">Achievements</a>
+  <a href="#testimonials" onclick="closeMenu()">Testimonials</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- ── HERO ── -->
 <section id="hero">
   <div class="wrapper">
     <div class="hero-inner">
@@ -573,8 +379,10 @@
         </div>
       </div>
       <div class="hero-photo">
-        <div class="photo-frame">
-          <img class="uploaded-photo" src="images/profile.JPG" alt="Minteena Prajith" />
+        <div class="photo-ring-outer">
+          <div class="photo-frame">
+            <img src="images/Photo_2026.png" alt="Minteena Prajith" />
+          </div>
         </div>
       </div>
     </div>
@@ -590,45 +398,48 @@
     </div>
     <div class="skills-grid reveal">
       <div class="skill-card">
-        <div class="skill-cat">Programming & Automation</div>
+        <div class="skill-cat">Programming & 3D Modelling</div>
         <div class="skill-tags">
+          <span class="tag">Linux</span>
           <span class="tag">Python</span>
-          <span class="tag">C</span>
+          <span class="tag">C/C++</span>
           <span class="tag">MATLAB</span>
           <span class="tag">Assembly</span>
-          <span class="tag">Arduino</span>
-          <span class="tag">ESP32</span>
-          <span class="tag">Raspberry Pi</span>
-          <span class="tag">Microbit</span>
+          <span class="tag">Java</span>
+          <span class="tag">Multisim</span>
+          <span class="tag">AutoCAD</span>
+          <span class="tag">TinkerCAD</span>
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-cat">Robotics & Simulation</div>
-        <div class="skill-tags">
-          <span class="tag">ROS 2</span>
-          <span class="tag">Turtlebot3</span>
-          <span class="tag">Dobot Magician</span>
-          <span class="tag">Webots</span>
-          <span class="tag">Dobot Virtual Lab</span>
-          <span class="tag">OpenCV</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Operations & Data</div>
+        <div class="skill-cat">Data Analysis & Operations</div>
         <div class="skill-tags">
           <span class="tag">Power BI</span>
-          <span class="tag">Excel</span>
+          <span class="tag">Microsoft Office 365</span>
+          <span class="tag">Odoo ERP</span>
           <span class="tag">Data Analysis</span>
           <span class="tag">Process Mapping</span>
           <span class="tag">Data Mining</span>
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-cat">3D Modelling & Networking</div>
+        <div class="skill-cat">Robotics & AI</div>
         <div class="skill-tags">
-          <span class="tag">AutoCAD</span>
-          <span class="tag">TinkerCAD</span>
-          <span class="tag">Multisim</span>
+          <span class="tag">ROS 2</span>
+          <span class="tag">Turtlebot3</span>
+          <span class="tag">Dobot Magician</span>
+          <span class="tag">Webots</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">ML/DL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Embedded Systems & IoT</div>
+        <div class="skill-tags">
+          <span class="tag">Arduino</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">Raspberry Pi</span>
+          <span class="tag">Microbit</span>
           <span class="tag">Cisco Packet Tracer</span>
           <span class="tag">iFogSim</span>
         </div>
@@ -637,7 +448,7 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ── PROJECTS ── -->
 <section id="projects">
   <div class="wrapper">
     <div class="reveal">
@@ -646,117 +457,83 @@
     </div>
     <div class="projects-grid">
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project1.jpeg" alt="Autonomous Road Defect Detection System" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(1)">
+        <div class="project-img"><img src="images/project1.jpeg" alt="Road Defect Detection"/></div>
         <div class="project-body">
           <div class="project-num">01</div>
           <h3>Autonomous Road Defect Detection System</h3>
-          <p>Real-time road defect detection on a Turtlebot3 Burger using OpenCV and Pi Camera in ROS 2, with LiDAR + IMU for obstacle avoidance. Foxglove Studio dashboard for live telemetry.</p>
-          <div class="project-stack">
-            <span>ROS 2</span><span>OpenCV</span><span>LiDAR</span><span>Foxglove</span>
-          </div>
+          <p>Real-time road defect detection on a Turtlebot3 Burger using OpenCV and Pi Camera in ROS 2, with LiDAR + IMU for obstacle avoidance.</p>
+          <div class="project-stack"><span>ROS 2</span><span>OpenCV</span><span>LiDAR</span><span>Foxglove</span></div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project2.jpeg" alt="Smart Fire Sprinkler System" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(2)">
+        <div class="project-img"><img src="images/project2.png" alt="Smart Fire Sprinkler"/></div>
         <div class="project-body">
           <div class="project-num">02</div>
           <h3>Smart Fire Sprinkler System</h3>
-          <p>IoT-integrated fire detection using Thermal Cameras and Flame Sensors. Assesses fire intensity and deploys water optimally to minimise damage — faster response than conventional systems.</p>
-          <div class="project-stack">
-            <span>ESP32</span><span>Thermal Camera</span><span>Flame Sensors</span><span>IoT</span>
-          </div>
+          <p>IoT-integrated fire detection using Thermal Cameras and Flame Sensors. Assesses fire intensity and deploys water optimally.</p>
+          <div class="project-stack"><span>ESP32</span><span>Thermal Camera</span><span>Flame Sensors</span><span>IoT</span></div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project3.jpeg" alt="Automated Pick-and-Place Sorting System" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(3)">
+        <div class="project-img"><img src="images/project3.png" alt="Pick and Place"/></div>
         <div class="project-body">
           <div class="project-num">03</div>
           <h3>Automated Pick-and-Place Sorting System</h3>
-          <p>Path-following Maqueen robot transports blocks to a Dobot Magician robotic arm. Camera-based color and text detection classifies objects; conveyor sorting with adjustable speed control.</p>
-          <div class="project-stack">
-            <span>Maqueen</span><span>Dobot Magician</span><span>Computer Vision</span><span>Python</span>
-          </div>
+          <p>Path-following Maqueen robot transports blocks to a Dobot Magician robotic arm with camera-based color and text detection.</p>
+          <div class="project-stack"><span>Maqueen</span><span>Dobot Magician</span><span>Computer Vision</span><span>Python</span></div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project4.jpeg" alt="Autonomous Waypoint Navigation" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(4)">
+        <div class="project-img"><img src="images/project4.jpeg" alt="Waypoint Navigation"/></div>
         <div class="project-body">
           <div class="project-num">04</div>
           <h3>Autonomous Waypoint Navigation & Object Detection</h3>
-          <p>Turtlebot3 performing autonomous waypoint navigation with 360° scanning. Real-time color recognition via OpenCV tracks and counts objects by color on a live dashboard.</p>
-          <div class="project-stack">
-            <span>Turtlebot3</span><span>ROS 2</span><span>OpenCV</span><span>Python</span>
-          </div>
+          <p>Turtlebot3 performing autonomous waypoint navigation with 360° scanning and real-time color recognition via OpenCV.</p>
+          <div class="project-stack"><span>Turtlebot3</span><span>ROS 2</span><span>OpenCV</span><span>Python</span></div>
         </div>
       </div>
 
-      <!-- PLACEHOLDER CARD 5 — replace with your project -->
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project5.jpeg" alt="Network Infrastructure Development" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(5)">
+        <div class="project-img"><img src="images/project6.jpeg" alt="Network Infrastructure"/></div>
         <div class="project-body">
           <div class="project-num">05</div>
           <h3>Network Infrastructure Development</h3>
-          <p>Designed and implemented a complete network infrastructure, including routers, switches, cloud integration, security solutions, and VoIP systems enhancing connectivity, security, and efficiency.</p>
-          <div class="project-stack">
-            <span>Cisco Packet Tracer</span><span>Networking</span>
-          </div>
+          <p>Designed and implemented a complete network infrastructure including routers, switches, cloud integration, security, and VoIP systems.</p>
+          <div class="project-stack"><span>Cisco Packet Tracer</span><span>Networking</span></div>
         </div>
       </div>
 
-      <!-- PLACEHOLDER CARD 6 -->
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project6.jpeg" alt="Solar Tracking Device" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(6)">
+        <div class="project-img"><img src="images/project5.jpeg" alt="Solar Tracking Device"/></div>
         <div class="project-body">
           <div class="project-num">06</div>
           <h3>Solar Tracking Device</h3>
           <p>Developed a solar tracker using LDRs to detect light and automatically adjust panel orientation for maximum efficiency.</p>
-          <div class="project-stack">
-            <span>Arduino</span><span>LDR</span>
-          </div>
+          <div class="project-stack"><span>Arduino</span><span>LDR</span></div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project7.jpeg" alt="Smart Fleet Tracker" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(7)">
+        <div class="project-img"><img src="images/project8.png" alt="Smart Fleet Tracker"/></div>
         <div class="project-body">
           <div class="project-num">07</div>
           <h3>Smart Fleet Tracker</h3>
-          <p>A real-time Industrial IoT (IIoT) telemetry solution leveraging the MQTT protocol to stream live vehicle fleet data into a dynamic Node-RED dashboard for continuous visual monitoring.</p>
-          <div class="project-stack">
-            <span>IIoT</span><span>MQTT</span><span>Node-RED</span>
-          </div>
+          <p>A real-time IIoT telemetry solution leveraging MQTT to stream live vehicle fleet data into a dynamic Node-RED dashboard.</p>
+          <div class="project-stack"><span>IIoT</span><span>MQTT</span><span>Node-RED</span></div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-img">
-          <img class="proj-photo" src="images/project8.jpeg" alt="Line Following Robot" />
-        </div>
+      <div class="project-card reveal" onclick="openProjectModal(8)">
+        <div class="project-img"><img src="images/project7.png" alt="Line Following Robot"/></div>
         <div class="project-body">
           <div class="project-num">08</div>
           <h3>Line Following Robot — Webots Simulation</h3>
-          <p>Implemented a line-following robot using the Epoch robot in the Webots simulation environment, programming sensor-based navigation logic for precise path tracking.</p>
-          <div class="project-stack">
-            <span>Webots</span><span>C++</span>
-          </div>
+          <p>Implemented a line-following robot using the Epoch robot in Webots, programming sensor-based navigation logic for precise path tracking.</p>
+          <div class="project-stack"><span>Webots</span><span>C++</span></div>
         </div>
       </div>
 
@@ -764,7 +541,7 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ── EXPERIENCE ── -->
 <section id="experience">
   <div class="wrapper">
     <div class="reveal">
@@ -772,7 +549,6 @@
       <h2>Where I've worked</h2>
     </div>
     <div class="exp-list">
-
       <div class="exp-item reveal">
         <div class="exp-date">Jul 2025 –<br>Sep 2025</div>
         <div>
@@ -786,7 +562,6 @@
           </ul>
         </div>
       </div>
-
       <div class="exp-item reveal">
         <div class="exp-date">Apr 2025</div>
         <div>
@@ -798,27 +573,23 @@
           </ul>
         </div>
       </div>
-
-      <!-- ADD YOUR THIRD WORK EXPERIENCE HERE -->
       <div class="exp-item reveal">
-        <div class="exp-date">July 2023 –<br>july 2024</div>
+        <div class="exp-date">Jul 2023 –<br>Jul 2024</div>
         <div>
-          <div class="exp-role">E Commerce Specialist</div>
+          <div class="exp-role">E-Commerce Specialist</div>
           <div class="exp-company">Golden Praxis General Trading</div>
           <ul class="exp-bullets">
-            <li>Sales Performance: Consistently exceeded sales goals by developing effective strategies to promote products across various e-commerce platforms.</li>
-            <li>Data Mining and Analysis: Conducted data mining to gather detailed product information, enabling accurate and optimized product listings. This process improved the visibility and attractiveness of products.</li>
-            <li>Product Listing Optimization: Streamlined the product listing process across four major e-commerce platforms, Amazon, Noon, Dubai Stores, Storeus, ensuring consistency and enhancing the user experience.</li>
-            <li>Product Knowledge: Maintained an in-depth understanding of the company’s product offerings, services, and promotional strategies.</li>
+            <li>Consistently exceeded sales goals by developing effective strategies across Amazon, Noon, Dubai Stores, and Storeus.</li>
+            <li>Conducted data mining to gather product information, enabling accurate and optimised listings for improved visibility.</li>
+            <li>Streamlined product listing processes across four major e-commerce platforms, ensuring consistency and better user experience.</li>
           </ul>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
+<!-- ── EDUCATION ── -->
 <section id="education">
   <div class="wrapper">
     <div class="reveal">
@@ -835,14 +606,164 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ── CERTIFICATIONS ── -->
+<section id="certifications">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">05 — Certifications</div>
+      <h2>Credentials</h2>
+    </div>
+    <div class="cert-grid reveal">
+      <!-- Replace these with your actual certifications -->
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-info">
+          <div class="cert-name">Certification Name</div>
+          <div class="cert-issuer">Issuing Organisation</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-info">
+          <div class="cert-name">Certification Name</div>
+          <div class="cert-issuer">Issuing Organisation</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-info">
+          <div class="cert-name">Certification Name</div>
+          <div class="cert-issuer">Issuing Organisation</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-info">
+          <div class="cert-name">Certification Name</div>
+          <div class="cert-issuer">Issuing Organisation</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACHIEVEMENTS ── -->
+<section id="achievements">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">06 — Achievements</div>
+      <h2>Milestones</h2>
+    </div>
+    <div class="achievement-list">
+      <div class="achievement-item reveal" onclick="openAchievementModal(1)">
+        <div class="achievement-left">
+          <div class="achievement-icon">🏆</div>
+          <div>
+            <div class="achievement-title">Achievement Title</div>
+            <div class="achievement-sub">Organisation · Year</div>
+          </div>
+        </div>
+        <div class="achievement-arrow">View Details →</div>
+      </div>
+      <div class="achievement-item reveal" onclick="openAchievementModal(2)">
+        <div class="achievement-left">
+          <div class="achievement-icon">🥇</div>
+          <div>
+            <div class="achievement-title">Achievement Title</div>
+            <div class="achievement-sub">Organisation · Year</div>
+          </div>
+        </div>
+        <div class="achievement-arrow">View Details →</div>
+      </div>
+      <div class="achievement-item reveal" onclick="openAchievementModal(3)">
+        <div class="achievement-left">
+          <div class="achievement-icon">🎖️</div>
+          <div>
+            <div class="achievement-title">Achievement Title</div>
+            <div class="achievement-sub">Organisation · Year</div>
+          </div>
+        </div>
+        <div class="achievement-arrow">View Details →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="wrapper">
+    <div class="reveal">
+      <div class="section-label">07 — Testimonials</div>
+      <h2>What people say</h2>
+    </div>
+    <div class="reveal">
+      <div class="testimonial-wrap" id="testimonialWrap"
+           onmouseenter="pauseTestimonials()" onmouseleave="resumeTestimonials()">
+        <div class="testimonial-track" id="testimonialTrack">
+
+          <!-- CARD 1 — Replace with real testimonial -->
+          <div class="testimonial-card">
+            <img class="testimonial-avatar" src="images/testimonial1.jpg" alt="Jyothis Nair"/>
+            <div class="testimonial-right">
+              <p class="testimonial-text">"During her time at dnata, she consistently demonstrated professionalism, reliability, and a strong work ethic. She was a dependable team member who handled her responsibilities with care and maintained high standards in her work. Her positive attitude and commitment to excellence made her a valued member of the team, and I would confidently recommend her for future opportunities."</p>
+              <div class="testimonial-name">Jyothis Nair</div>
+              <div class="testimonial-role">MANAGER - CARGO BUSINESS SUPPORT · dnata - Emirates Group</div>
+            </div>
+          </div>
+
+          <!-- CARD 2 — Replace with real testimonial -->
+          <div class="testimonial-card">
+            <img class="testimonial-avatar" src="images/testimonial2.jpg" alt="Vaibhav Mall"/>
+            <div class="testimonial-right">
+              <p class="testimonial-text">"I worked with her on several college projects, and she was always reliable, hardworking, and supportive. She contributed great ideas, collaborated well with the team, and consistently delivered high-quality work. She was a pleasure to work with and an excellent teammate"</p>
+              <div class="testimonial-name">Vaibhav Mall</div>
+              <div class="testimonial-role">Robotics & AI Engineer · Ascend Esports</div>
+            </div>
+          </div>
+
+          <!-- CARD 3 — Replace with real testimonial -->
+          <div class="testimonial-card">
+            <img class="testimonial-avatar" src="images/testimonial3.jpg" alt="Gerome Lettone De Leon"/>
+            <div class="testimonial-right">
+              <p class="testimonial-text">"She worked under my supervision as an E-commerce Specialist and consistently delivered high-quality results. She managed product listings, updates, and online operations with strong attention to detail and efficiency. She was proactive, reliable, and quick to adapt to changing priorities. I would confidently recommend her for any e-commerce or digital operations role."</p>
+              <div class="testimonial-name">Gerome Lettone De Leon</div>
+              <div class="testimonial-role">Head of E-Commerce Business Development · Golden Praxis General Trading</div>
+            </div>
+          </div>
+
+        </div><!-- /track -->
+      </div><!-- /wrap -->
+
+      <div class="testimonial-progress"><div class="testimonial-progress-bar" id="tProgressBar"></div></div>
+
+      <div class="testimonial-controls">
+        <div class="testimonial-dots" id="testimonialDots"></div>
+        <div class="testimonial-arrows">
+          <button class="testimonial-arrow" onclick="testimonialPrev()" aria-label="Previous">&#8249;</button>
+          <button class="testimonial-arrow" onclick="testimonialNext()" aria-label="Next">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
 <section id="contact">
   <div class="wrapper">
     <div class="contact-inner reveal">
-      <div class="section-label">05 — Contact</div>
+      <div class="section-label">08 — Contact</div>
       <h2>Let's connect</h2>
       <p class="contact-sub">Open to IoT opportunities, internships, and interesting engineering projects. Drop me a message and I'll get back to you.</p>
-
+      <div class="contact-social">
+        <a href="https://www.linkedin.com/in/minteena-prajith/" target="_blank" rel="noopener noreferrer" class="social-btn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
       <div class="form-group">
         <label>Your Name</label>
         <input type="text" id="senderName" placeholder="e.g. Sarah Ahmed" />
@@ -866,40 +787,385 @@
 </footer>
 
 <script>
-  /* ── Scroll reveal ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* ── SLIDER STATE ── */
+let sliderImages = [];
+let sliderIndex = 0;
 
-  /* ── Contact form → mailto ── */
-  function sendMessage() {
-    const name    = document.getElementById('senderName').value.trim();
-    const email   = document.getElementById('senderEmail').value.trim();
-    const message = document.getElementById('msgBody').value.trim();
-    const status  = document.getElementById('formStatus');
+function buildSlider(images) {
+  sliderImages = images;
+  sliderIndex = 0;
+  const single = images.length === 1;
+  const dotsHTML = !single ? `<div class="slider-dots">${images.map((_,i) => `<button class="slider-dot${i===0?' active':''}" onclick="goToSlide(${i})"></button>`).join('')}</div>` : '';
+  return `
+    <div class="modal-slider">
+      <img class="modal-hero-img" id="modalMainImg" src="${images[0]}" alt="Image 1" />
+      ${!single ? `<button class="slider-btn prev" id="sliderPrev" onclick="prevImg()" disabled>&#8249;</button>` : ''}
+      ${!single ? `<button class="slider-btn next" id="sliderNext" onclick="nextImg()">&#8250;</button>` : ''}
+      ${!single ? `<div class="slider-counter" id="sliderCounter">1 / ${images.length}</div>` : ''}
+      ${dotsHTML}
+    </div>`;
+}
 
-    if (!name || !email || !message) {
-      status.className = 'form-status error';
-      status.textContent = 'Please fill in all fields before sending.';
-      return;
-    }
+function updateSlider() {
+  const img = document.getElementById('modalMainImg');
+  img.classList.add('fading');
+  setTimeout(() => {
+    img.src = sliderImages[sliderIndex];
+    img.alt = 'Image ' + (sliderIndex + 1);
+    img.classList.remove('fading');
+  }, 220);
+  const counter = document.getElementById('sliderCounter');
+  if (counter) counter.textContent = `${sliderIndex + 1} / ${sliderImages.length}`;
+  const prev = document.getElementById('sliderPrev');
+  const next = document.getElementById('sliderNext');
+  if (prev) prev.disabled = sliderIndex === 0;
+  if (next) next.disabled = sliderIndex === sliderImages.length - 1;
+  document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === sliderIndex));
+}
 
-    const subject = encodeURIComponent('Portfolio Message from ' + name);
-    const body    = encodeURIComponent(
-      'Name: ' + name + '\nEmail: ' + email + '\n\n' + message
-    );
-    window.location.href = 'mailto:minteenaprajith123@gmail.com?subject=' + subject + '&body=' + body;
+function prevImg() { if (sliderIndex > 0) { sliderIndex--; updateSlider(); } }
+function nextImg() { if (sliderIndex < sliderImages.length - 1) { sliderIndex++; updateSlider(); } }
+function goToSlide(i) { sliderIndex = i; updateSlider(); }
 
-    status.className = 'form-status success';
-    status.textContent = '✓ Opening your mail app — thanks for reaching out, ' + name + '!';
+/* ── DATA ── */
+const PROJECTS = {
+  1: {
+    num: '01', title: 'Autonomous Road Defect Detection System',
+    gallery: ['images/project1.jpeg','images/project1_a.jpeg','images/project1_b.jpeg','images/project1_c.png'],
+    // To add more images: gallery: ['images/project1.jpeg', 'images/project1_b.jpg', 'images/project1_c.jpg'],
+    desc: 'A fully autonomous system deployed on a Turtlebot3 Burger robot capable of detecting road defects in real time. The robot navigates independently while scanning the environment using a Pi Camera paired with OpenCV for image processing and defect identification.',
+    features: [
+      'Real-time road defect detection using Pi Camera and OpenCV image processing',
+      'Integrated LiDAR and IMU sensors for autonomous obstacle avoidance and localisation',
+      'Custom ROS 2 node architecture managing navigation, sensing, and detection pipelines',
+      'Live telemetry dashboard built on Foxglove Studio displaying robot state and defect data',
+      'Autonomous waypoint-to-waypoint traversal without human intervention'
+    ],
+    stack: ['ROS 2', 'OpenCV', 'LiDAR', 'IMU', 'Pi Camera', 'Foxglove Studio', 'Python', 'Turtlebot3 Burger']
+  },
+  2: {
+    num: '02', title: 'Smart Fire Sprinkler System',
+    gallery: ['images/project2.png','images/project2_a.jpeg','images/project2_b.jpeg','images/project2_c.jpeg'],
+    desc: 'An IoT-based intelligent fire suppression system that uses a combination of thermal cameras and flame sensors to detect fires earlier and more accurately than conventional smoke-based systems. The system assesses fire intensity before activating sprinklers.',
+    features: [
+      'Multi-sensor fusion combining thermal imaging and flame sensors for accurate detection',
+      'Intelligent fire intensity assessment to deploy water proportionally and minimise damage',
+      'IoT-based smart activation with significantly reduced response time vs traditional systems',
+      'ESP32 microcontroller managing sensor data processing and actuator control',
+      'Control logic that prevents false positives and unnecessary water deployment'
+    ],
+    stack: ['ESP32', 'Thermal Camera', 'Flame Sensors', 'IoT', 'Embedded C', 'Arduino IDE']
+  },
+  3: {
+    num: '03', title: 'End-to-End Robotic Sorting & Conveyor Automation System',
+    gallery: ['images/project3.png','images/project3_a.png','images/project3_b.png'],
+    desc: 'An end-to-end automated sorting pipeline combining a mobile path-following robot with a 6-DOF robotic arm. The Maqueen robot transports objects along a line track to a pickup station where the Dobot Magician arm classifies and sorts them using camera-based vision.',
+    features: [
+      'Path-following Maqueen robot using IR sensors for precise line tracking',
+      'Camera-based color and text recognition for intelligent object classification',
+      'Dobot Magician robotic arm performing accurate pick-and-place operations',
+      'Conveyor-based sorting output with adjustable speed control',
+      'Seamless handoff protocol between mobile robot and robotic arm'
+    ],
+    stack: ['Maqueen Robot', 'Dobot Magician', 'Computer Vision', 'Python', 'OpenCV']
+  },
+  4: {
+    num: '04', title: 'Autonomous Waypoint Navigation & Color Object Detection',
+    gallery: ['images/project4.jpeg','images/project4_a.jpeg','images/project4_b.png'],
+    desc: 'A Turtlebot3 robot programmed to autonomously navigate between predefined waypoints while performing 360° environmental scanning at each stop. The robot identifies and counts colored blocks using OpenCV and maintains a live count dashboard.',
+    features: [
+      'Autonomous waypoint-to-waypoint navigation using ROS 2 Nav2 stack',
+      '360° rotational scanning at each waypoint for complete object detection coverage',
+      'Real-time color recognition using camera input and OpenCV HSV filtering',
+      'Dynamic dashboard displaying color-wise object count during navigation',
+      'Custom ROS 2 nodes for navigation state machine and detection pipeline'
+    ],
+    stack: ['Turtlebot3', 'ROS 2', 'Nav2', 'OpenCV', 'Python', 'Foxglove Studio']
+  },
+  5: {
+    num: '05', title: 'Network Infrastructure Development',
+    gallery: ['images/project5.jpeg','images/project5_a.png','images/project5_b.png'],
+    desc: 'Designed and simulated a complete enterprise-grade network infrastructure in Cisco Packet Tracer, covering connectivity from end-devices through to cloud integration. The project addressed routing, switching, security, and communication requirements.',
+    features: [
+      'Full network topology design including routers, switches, and end-user devices',
+      'Cloud integration configuration for hybrid on-premise and cloud connectivity',
+      'Network security implementation including firewalls and access control lists',
+      'VoIP system setup enabling internal voice communication',
+      'VLAN segmentation for improved network performance and security'
+    ],
+    stack: ['Cisco Packet Tracer', 'Networking', 'VLANs', 'VoIP', 'ACLs', 'Routing Protocols']
+  },
+  6: {
+    num: '06', title: 'Solar Tracking Device',
+    gallery: ['images/project6.jpeg'],
+    desc: 'A hardware project implementing an automatic solar tracking system using Light Dependent Resistors (LDRs) to detect the direction of maximum light intensity and adjust the solar panel orientation accordingly, maximising energy capture throughout the day.',
+    features: [
+      'Dual-axis light sensing using LDR sensors to detect optimal sunlight direction',
+      'Servo motor-driven panel movement for smooth directional adjustment',
+      'Arduino-based control logic comparing sensor readings and computing movement',
+      'Real-time orientation adjustment as lighting conditions change',
+      'Low-cost hardware implementation with practical energy efficiency gains'
+    ],
+    stack: ['Arduino', 'LDR Sensors', 'Servo Motors', 'Embedded C', 'TinkerCAD']
+  },
+  7: {
+    num: '07', title: 'Smart Fleet Tracker',
+    gallery: ['images/project7.png'],
+    desc: 'A real-time Industrial IoT (IIoT) telemetry solution that streams live vehicle fleet data using the MQTT protocol into a dynamic Node-RED dashboard. The system provides continuous visual monitoring of fleet status, enabling data-driven fleet management decisions.',
+    features: [
+      'MQTT protocol implementation for lightweight, real-time data streaming from vehicles',
+      'Node-RED dashboard with live gauges, charts, and status indicators',
+      'Multi-vehicle fleet monitoring with per-vehicle telemetry panels',
+      'Alert system for threshold breaches on key vehicle parameters',
+      'Scalable IIoT architecture designed for industrial deployment'
+    ],
+    stack: ['MQTT', 'Node-RED', 'IoT', 'JavaScript', 'Dashboard Design', 'Telemetry']
+  },
+  8: {
+    num: '08', title: 'Line Following Robot — Webots Simulation',
+    gallery: ['images/project8.png'],
+    desc: 'A simulated line-following robot implemented in the Webots robotics simulation environment using the Epoch robot model. The project focused on programming sensor-based reactive navigation logic to enable the robot to accurately follow a predefined path.',
+    features: [
+      'Webots simulation environment setup with Epoch robot model and track layout',
+      'Infrared sensor-based line detection and error computation',
+      'PID-inspired control logic for smooth and accurate path following',
+      'Handling of track variations including curves and intersections',
+      'Simulation-first approach enabling rapid iteration before physical deployment'
+    ],
+    stack: ['Webots', 'Epoch Robot', 'C++', 'PID Control', 'Simulation', 'Sensor Fusion']
   }
-</script>
+  9: {
+    num: '09', title: 'Smart Attendance Tracker',
+    gallery: ['images/project9.jpg','image9_a.jpg'],
+    desc: 'An automated attendance tracking system using RFID technology. The system detects and logs the presence of RFID tags, providing real-time attendance data and historical records for analysis.',
+    features: [
+      'RFID-based presence detection for accurate attendance tracking',
+      'Ultrasonic sensor integration for proximity detection and enhanced accuracy',
+      'Arduino-based hardware implementation for real-world deployment',
+      'Real-time attendance dashboard with historical data analysis capabilities'
+    ],
+    stack: ['RFID', 'Ultrasonic Sensor', 'C', 'Arduino']
+  }
+};
 
+const ACHIEVEMENTS = {
+  1: {
+    icon: '🏆',
+    title: '2nd Place — Engineering Innovation Fair',
+    org: 'University of Wollongong in Dubai',
+    year: '2025',
+    desc: 'Secured 2nd place at UOWDs Innovation Fair, showcasing PaveWay, an Autonomous Road Inspection Robot',
+    details: ['Key detail or highlight about this achievement', 'Another point about what you did to earn it', 'Impact or recognition that followed'],
+    images: ['images/award1.jpeg']
+    // To add images: images: ['images/achievement1.jpg', 'images/achievement1_b.jpg']
+  },
+  2: {
+    icon: '🥇',
+    title: '2nd Place - CSAW Cybersec Hackathon',
+    org: 'New York University Abu Dhabi',
+    year: '2025',
+    desc: 'Our project, "From Clicks to Collision: A Cyber-Physical Kill Chain," involved a deep dive into the vulnerabilities of Robot Operating Systems (ROS). We successfully demonstrated a multi-phase cyber attack, showing how a remote attacker could progress from an initial network breach (Phase 1) to system infiltration (Phase 2), and ultimately to operational sabotage (Phase 3), causing the robot to malfunction and "collide."',
+    details: ['Key detail about this achievement', 'What you accomplished', 'Recognition received'],
+    images: ['images/award2.jpeg', 'images/award2_a.jpeg','images/award2_b.jpeg','images/award2_c.jpeg']
+  },
+  3: {
+    icon: '🎖️',
+    title: 'Deans List — Academic Excellence',
+    org: 'University of Wollongong in Dubai',
+    year: '2024',
+    desc: 'Awarded to students in the top 5% of their cohort.',
+    details: ['Key detail about this achievement', 'What you accomplished', 'Recognition received'],
+    images: ['images/award3.jpeg']
+  }
+};
+
+/* ── PROJECT MODAL ── */
+function openProjectModal(id) {
+  const p = PROJECTS[id];
+  if (!p) return;
+  document.getElementById('modalContent').innerHTML = `
+    ${buildSlider(p.gallery)}
+    <div class="modal-body">
+      <div class="modal-tag">Project ${p.num}</div>
+      <div class="modal-title">${p.title}</div>
+      <div class="modal-desc">${p.desc}</div>
+      <div class="modal-features">
+        <h4>Key Features</h4>
+        <ul>${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>
+      <div class="modal-divider"></div>
+      <div class="modal-stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
+    </div>`;
+  openModal();
+}
+
+/* ── ACHIEVEMENT MODAL ── */
+function openAchievementModal(id) {
+  const a = ACHIEVEMENTS[id];
+  if (!a) return;
+  const hasImages = a.images && a.images.length > 0;
+  const sliderSection = hasImages ? buildSlider(a.images) : '';
+  document.getElementById('modalContent').innerHTML = `
+    ${sliderSection}
+    <div class="modal-body" style="${!hasImages ? 'padding-top:3rem;' : ''}">
+      <div style="font-size:3rem;margin-bottom:1rem;">${a.icon}</div>
+      <div class="modal-tag">${a.org} · ${a.year}</div>
+      <div class="modal-title">${a.title}</div>
+      <div class="modal-desc">${a.desc}</div>
+      <div class="modal-features">
+        <h4>Highlights</h4>
+        <ul>${a.details.map(d => `<li>${d}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+  if (hasImages) openModal();
+  else openModal();
+}
+
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowLeft' && document.getElementById('modalOverlay').classList.contains('open')) prevImg();
+  if (e.key === 'ArrowRight' && document.getElementById('modalOverlay').classList.contains('open')) nextImg();
+});
+
+
+/* ── TESTIMONIALS ── */
+(function() {
+  const INTERVAL = 5000;
+  let current = 0;
+  let timer = null;
+  let progressTimer = null;
+  let progressStart = null;
+  let elapsed = 0;
+  let paused = false;
+
+  const track = document.getElementById('testimonialTrack');
+  const dotsContainer = document.getElementById('testimonialDots');
+  const progressBar = document.getElementById('tProgressBar');
+  if (!track) return;
+
+  const cards = track.querySelectorAll('.testimonial-card');
+  const total = cards.length;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+    dot.addEventListener('click', () => { goTo(i); resetProgress(); });
+    dotsContainer.appendChild(dot);
+  }
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.testimonial-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function resetProgress() {
+    elapsed = 0;
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    progressBar.offsetHeight; // force reflow
+    progressBar.style.transition = 'width ' + INTERVAL + 'ms linear';
+    progressBar.style.width = '100%';
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(() => { if (!paused) { goTo(current + 1); } }, INTERVAL);
+    resetProgress();
+  }
+
+  window.testimonialNext = function() { goTo(current + 1); startAuto(); };
+  window.testimonialPrev = function() { goTo(current - 1); startAuto(); };
+  window.pauseTestimonials = function() {
+    paused = true;
+    progressBar.style.animationPlayState = 'paused';
+    progressBar.style.transition = 'none';
+  };
+  window.resumeTestimonials = function() {
+    paused = false;
+    resetProgress();
+  };
+
+  startAuto();
+})();
+
+/* ── SWIPE SUPPORT ── */
+let touchStartX = 0;
+document.getElementById('modal').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('modal').addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) { diff > 0 ? nextImg() : prevImg(); }
+}, { passive: true });
+
+/* ── NAV ── */
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ── SCROLL REVEAL ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── CONTACT FORM ── */
+async function sendMessage() {
+  const name = document.getElementById('senderName').value.trim();
+  const email = document.getElementById('senderEmail').value.trim();
+  const message = document.getElementById('msgBody').value.trim();
+  const status = document.getElementById('formStatus');
+  const btn = document.querySelector('#contact .btn-primary');
+  if (!name || !email || !message) {
+    status.className = 'form-status error';
+    status.textContent = 'Please fill in all fields before sending.';
+    return;
+  }
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/mzdwageo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, message })
+    });
+    if (res.ok) {
+      status.className = 'form-status success';
+      status.textContent = "✓ Message sent! I'll get back to you soon, " + name + ".";
+      document.getElementById('senderName').value = '';
+      document.getElementById('senderEmail').value = '';
+      document.getElementById('msgBody').value = '';
+      btn.textContent = 'Message Sent ✓';
+    } else { throw new Error(); }
+  } catch {
+    status.className = 'form-status error';
+    status.textContent = 'Something went wrong. Please try again or email minteenaprajith123@gmail.com directly.';
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }
+}
+</script>
 </body>
 </html>
