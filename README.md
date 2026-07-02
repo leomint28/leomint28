@@ -1,6 +1,6 @@
 # Minteena Prajith — Personal Portfolio
 
-> Live site: **[leomint28.github.io]([https://leomint28.github.io](https://leomint28.github.io/leomint28/))**  
+> Live site: **[leomint28.github.io]([https://leomint28.github.io/leomint28/])**  
 
 ---
 
